@@ -64,7 +64,7 @@
         <source.version>1.6</source.version>
         <selenium.version>2.46.0</selenium.version>
 
-        <maven-release-plugin.version>2.5.2</maven-release-plugin.version>
+        <maven-release-plugin.version>2.4.1</maven-release-plugin.version>
         <!-- /  versions -->
 
     </properties>
