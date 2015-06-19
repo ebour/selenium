@@ -4,7 +4,7 @@
 
     <groupId>com.github.ebour.selenium</groupId>
     <artifactId>selenium</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.8</version>
 
     <name>Selenium</name>
     <packaging>pom</packaging>
@@ -55,7 +55,7 @@
         <connection>scm:git:https://github.com/ebour/selenium.git</connection>
         <developerConnection>scm:git:git@github.com:ebour/selenium.git</developerConnection>
         <url>https://github.com/ebour/selenium</url>
-        <tag>HEAD</tag>
+        <tag>selenium-1.0.8</tag>
     </scm>
 
     <properties>
