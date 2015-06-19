@@ -76,7 +76,7 @@
     <distributionManagement>
         <repository>
             <id>bintray</id>
-            <url>https://api.bintray.com/content/${env.BINTRAY_USER}/maven/selenium/${project.version}</url>
+            <url>https://api.bintray.com/maven/${env.BINTRAY_USER}/selenium/${project.version}</url>
         </repository>
     </distributionManagement>
 
