@@ -6,12 +6,12 @@
 
     <parent>
         <groupId>com.github.ebour.selenium</groupId>
-        <artifactId>selenium</artifactId>
+        <artifactId>selenium-chrome</artifactId>
         <version>1.0.9-SNAPSHOT</version>
     </parent>
 
-    <name>Selenium.Chromedriver</name>
-    <artifactId>selenium-chromedriver</artifactId>
+    <name>Selenium.Chrome.Driver</name>
+    <artifactId>selenium-chrome-driver</artifactId>
     <packaging>pom</packaging>
 
     <modules>
