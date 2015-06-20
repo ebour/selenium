@@ -38,7 +38,7 @@
                         </goals>
                         <configuration>
                             <url>${chromedriver-repo.url}/chromedriver_win32.zip</url>
-                            <unpack>false</unpack>
+                            <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}/drivers/windows-x86-32/</outputDirectory>
                         </configuration>
                     </execution>
@@ -50,7 +50,7 @@
                         </goals>
                         <configuration>
                             <url>${chromedriver-repo.url}/chromedriver_linux32.zip</url>
-                            <unpack>false</unpack>
+                            <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}/drivers/linux-x86-32/</outputDirectory>
                         </configuration>
                     </execution>
@@ -62,7 +62,7 @@
                         </goals>
                         <configuration>
                             <url>${chromedriver-repo.url}/chromedriver_linux64.zip</url>
-                            <unpack>false</unpack>
+                            <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}/drivers/linux-x86-64/</outputDirectory>
                         </configuration>
                     </execution>
@@ -74,7 +74,7 @@
                         </goals>
                         <configuration>
                             <url>${chromedriver-repo.url}/chromedriver_mac32.zip</url>
-                            <unpack>false</unpack>
+                            <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}/drivers/macosx-x86-32/</outputDirectory>
                         </configuration>
                     </execution>
