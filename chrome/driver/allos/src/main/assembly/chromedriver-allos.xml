@@ -23,9 +23,9 @@
             <destName>chromedriver-linux-x86-64</destName>
         </file>
         <file>
-            <source>${basedir}/target/drivers/macosx-x86-64/chromedriver</source>
+            <source>${basedir}/target/drivers/macosx-x86-32/chromedriver</source>
             <outputDirectory>/drivers</outputDirectory>
-            <destName>chromedriver-macosx-x86-64</destName>
+            <destName>chromedriver-macosx-x86-32</destName>
         </file>
         <file>
             <source>${basedir}/target/drivers/windows-x86-32/chromedriver.exe</source>
