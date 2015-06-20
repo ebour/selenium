@@ -5,11 +5,7 @@
     <parent>
         <groupId>com.github.ebour.selenium</groupId>
         <artifactId>selenium-chrome</artifactId>
-<<<<<<< HEAD
-        <version>1.0.11-SNAPSHOT</version>
-=======
-        <version>1.0.10-SNAPSHOT</version>
->>>>>>> parent of 5f88608... [maven-release-plugin] prepare release selenium-1.0.10
+        <version>1.0.10</version>
     </parent>
 
     <name>Selenium.Chrome.Driver</name>

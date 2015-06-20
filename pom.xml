@@ -4,11 +4,7 @@
 
     <groupId>com.github.ebour.selenium</groupId>
     <artifactId>selenium</artifactId>
-<<<<<<< HEAD
-    <version>1.0.11-SNAPSHOT</version>
-=======
-    <version>1.0.10-SNAPSHOT</version>
->>>>>>> parent of 5f88608... [maven-release-plugin] prepare release selenium-1.0.10
+    <version>1.0.10</version>
 
     <name>Selenium</name>
     <packaging>pom</packaging>
@@ -59,7 +55,7 @@
         <connection>scm:git:https://github.com/ebour/selenium.git</connection>
         <developerConnection>scm:git:git@github.com:ebour/selenium.git</developerConnection>
         <url>https://github.com/ebour/selenium</url>
-        <tag>HEAD</tag>
+        <tag>selenium-1.0.10</tag>
     </scm>
 
     <properties>
