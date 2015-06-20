@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.ebour.selenium</groupId>
+        <artifactId>selenium-chromedriver</artifactId>
+        <version>1.0.9-SNAPSHOT</version>
+    </parent>
+
+    <name>Selenium.Chromedriver-Allos</name>
+    <artifactId>selenium-chromedriver-allos</artifactId>
+    <packaging>jar</packaging>
+
+    <description>
+        Put chromedriver for all OS inside one package. The binary name does express which os it is working on.
+    </description>
+
+    <properties>
+        <chromedriver.version>2.15</chromedriver.version>
+        <chromedriver-repo.url>http://chromedriver.storage.googleapis.com/index.html?path=${chromedriver.version}</chromedriver-repo.url>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>download-chromedriver-windows-x86-32</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromedriver-repo.url}/chromedriver_win32.zip</url>
+                            <unpack>false</unpack>
+                            <outputDirectory>${project.build.directory}/drivers/windows-x86-32/</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>download-chromedriver-linux-x86-32</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromedriver-repo.url}/chromedriver_linux32.zip</url>
+                            <unpack>false</unpack>
+                            <outputDirectory>${project.build.directory}/drivers/linux-x86-32/</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>download-chromedriver-linux-x86-64</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromedriver-repo.url}/chromedriver_linux64.zip</url>
+                            <unpack>false</unpack>
+                            <outputDirectory>${project.build.directory}/drivers/linux-x86-64/</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>download-chromedriver-macosx-x86-32</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromedriver-repo.url}/chromedriver_mac32.zip</url>
+                            <unpack>false</unpack>
+                            <outputDirectory>${project.build.directory}/drivers/macosx-x86-32/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-drivers-package</id>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/chromedriver-allos.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
