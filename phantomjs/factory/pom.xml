@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.ebour.selenium</groupId>
+        <artifactId>selenium-phantomjs</artifactId>
+        <version>1.0.10</version>
+    </parent>
+
+    <artifactId>selenium-phantomjs-factory</artifactId>
+
+    <name>Selenium.Phantomjs.Factory</name>
+    <packaging>jar</packaging>
+
+    <description>
+        PhantomJS tool to instantiate easily from Selenium
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ebour.selenium</groupId>
+            <artifactId>selenium-factories-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.detro</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

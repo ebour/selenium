@@ -8,13 +8,11 @@
         <version>1.0.10</version>
     </parent>
 
-    <artifactId>selenium-phantomjs</artifactId>
-
-    <name>Selenium.Phantomjs</name>
+    <name>Selenium.Firefox</name>
+    <artifactId>selenium-firefox</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>driver</module>
         <module>factory</module>
     </modules>
 

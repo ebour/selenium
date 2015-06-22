@@ -10,10 +10,96 @@
 
     <name>Selenium.Chrome.Driver</name>
     <artifactId>selenium-chrome-driver</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>allos</module>
-    </modules>
+    <description>
+        Set of tools to ease Selenium and chrome driver usage.
+    </description>
+
+    <properties>
+        <chromedriver.version>2.15</chromedriver.version>
+        <chromedriver-repo.url>http://chromedriver.storage.googleapis.com/${chromedriver.version}</chromedriver-repo.url>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>download-chromedriver-windows-x86-32</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromedriver-repo.url}/chromedriver_win32.zip</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}/drivers/windows-x86-32/</outputDirectory>
+                            <sha1>23d8c1a6a96f85f21f5b06c7df1000dd82e0d3be</sha1>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>download-chromedriver-linux-x86-32</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromedriver-repo.url}/chromedriver_linux32.zip</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}/drivers/linux-x86-32/</outputDirectory>
+                            <sha1>419c9689ccf176df6dd76fa233e91c269b31644c</sha1>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>download-chromedriver-linux-x86-64</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromedriver-repo.url}/chromedriver_linux64.zip</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}/drivers/linux-x86-64/</outputDirectory>
+                            <sha1>ebc3e490e9a91497377b8d04e4c8b7ab4020674f</sha1>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>download-chromedriver-macosx-x86-32</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>${chromedriver-repo.url}/chromedriver_mac32.zip</url>
+                            <unpack>true</unpack>
+                            <outputDirectory>${project.build.directory}/drivers/macosx-x86-32/</outputDirectory>
+                            <sha1>2c7cb03dff95f37f2558f42d2c0521098e24f27f</sha1>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-drivers-package</id>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/chromedriver-allos.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

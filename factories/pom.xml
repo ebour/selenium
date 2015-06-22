@@ -8,14 +8,18 @@
         <version>1.0.10</version>
     </parent>
 
-    <artifactId>selenium-phantomjs</artifactId>
+    <artifactId>selenium-factories</artifactId>
 
-    <name>Selenium.Phantomjs</name>
+    <name>Selenium.Factories</name>
     <packaging>pom</packaging>
 
+    <description>
+        A Set of apis to unify any browser instantiation and configuration.
+    </description>
+
     <modules>
-        <module>driver</module>
-        <module>factory</module>
+        <module>api</module>
+        <module>local</module>
     </modules>
 
 </project>
