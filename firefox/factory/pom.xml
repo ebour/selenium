@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>com.github.ebour.selenium</groupId>
-        <artifactId>selenium-chrome</artifactId>
+        <artifactId>selenium-firefox</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
