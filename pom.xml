@@ -66,6 +66,8 @@
         <phantomjs.version>1.2.0</phantomjs.version>
 
         <maven-release-plugin.version>2.4.1</maven-release-plugin.version>
+        <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+
         <!-- /  versions -->
 
     </properties>
@@ -121,6 +123,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${source.version}</source>
                     <target>${source.version}</target>
