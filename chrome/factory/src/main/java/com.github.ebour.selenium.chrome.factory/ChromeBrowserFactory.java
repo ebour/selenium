@@ -14,9 +14,6 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by ebour on 20/06/15.
- */
 public class ChromeBrowserFactory implements BrowserFactory
 {
     private final static Logger LOG = Logger.getLogger(ChromeBrowserFactory.class.getName());

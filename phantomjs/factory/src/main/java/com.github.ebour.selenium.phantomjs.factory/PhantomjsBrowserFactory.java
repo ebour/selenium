@@ -13,9 +13,6 @@ import org.openqa.selenium.remote.service.DriverService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by ebour on 20/06/15.
- */
 public class PhantomjsBrowserFactory implements BrowserFactory
 {
     private final static Logger LOG = Logger.getLogger(PhantomjsBrowserFactory.class.getCanonicalName());

@@ -10,9 +10,6 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- * Created by su on 30/01/14.
- */
 public class DefaultElementImpl implements Element
 {
     private final static Logger LOG = Logger.getLogger(DefaultElementImpl.class.getCanonicalName());

@@ -5,9 +5,6 @@ import com.github.ebour.selenium.factories.api.element.Element;
 import com.github.ebour.selenium.factories.api.element.ElementFactory;
 import org.openqa.selenium.By;
 
-/**
- * Created by ebour on 21/06/15.
- */
 public class DefaultElementFactoryImpl implements ElementFactory
 {
     public Element buildElement(Browser browser, By selector, String pageClassName)

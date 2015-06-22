@@ -15,9 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by ebour on 20/06/15.
- */
 public class AbstractBrowser implements Browser
 {
     private final static Logger LOG = Logger.getLogger(AbstractBrowser.class.getName());

@@ -2,9 +2,6 @@ package com.github.ebour.selenium.factories.api;
 
 import org.openqa.selenium.remote.service.DriverService;
 
-/**
- * Created by su on 06/02/14.
- */
 public class SeleniumService implements Service
 {
     private final DriverService driverService;

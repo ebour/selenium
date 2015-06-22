@@ -3,9 +3,6 @@ package com.github.ebour.selenium.factories.api;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by ebour on 08/02/14.
- */
 public class ServiceStopper extends Thread
 {
     private static final Logger LOG = Logger.getLogger(ServiceStopper.class.getName());

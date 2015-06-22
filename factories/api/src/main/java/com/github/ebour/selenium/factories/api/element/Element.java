@@ -7,9 +7,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-/**
- * Created by ebour on 21/06/15.
- */
 public interface Element
 {
     Page getPage() throws Exception;

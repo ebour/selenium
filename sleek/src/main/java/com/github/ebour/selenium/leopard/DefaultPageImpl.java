@@ -5,9 +5,6 @@ import com.github.ebour.selenium.factories.api.element.Element;
 import com.github.ebour.selenium.factories.api.page.Page;
 import org.openqa.selenium.By;
 
-/**
- * Created by ebour on 20/06/15.
- */
 public class DefaultPageImpl implements Page
 {
     private final Browser browser;

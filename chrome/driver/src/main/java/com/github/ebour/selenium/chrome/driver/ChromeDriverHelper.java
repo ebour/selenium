@@ -2,9 +2,6 @@ package com.github.ebour.selenium.chrome.driver;
 
 import java.io.File;
 
-/**
- * Created by ebour on 20/06/15.
- */
 public class ChromeDriverHelper
 {
     private static final String CHROMEDRIVER_SUBFOLDER = "drivers/chromedriver";

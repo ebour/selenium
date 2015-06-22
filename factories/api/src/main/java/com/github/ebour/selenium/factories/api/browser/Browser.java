@@ -10,9 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.List;
 
-/**
- * Created by ebour on 20/06/15.
- */
 public interface Browser
 {
     Browser close() throws Exception;

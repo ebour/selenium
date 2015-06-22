@@ -3,9 +3,6 @@ package com.github.ebour.selenium.factories.api.browser;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by ebour on 20/06/15.
- */
 public class BrowserStopper extends Thread
 {
     private final static Logger LOG = Logger.getLogger(BrowserStopper.class.getName());
