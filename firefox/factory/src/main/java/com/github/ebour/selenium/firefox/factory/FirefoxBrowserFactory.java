@@ -47,7 +47,7 @@ public class FirefoxBrowserFactory implements BrowserFactory
                 ProxyServer proxy = newProxy(profile, capabilities);
 
                 // create a simple proxy manager
-                final BrowserProfilingProxy profilingProxy = new BrowserProfilingProxy(proxy);
+                final FirefoxBrowserProfilingProxy profilingProxy = new FirefoxBrowserProfilingProxy(proxy);
 
                 // store the proxy in the browser to be able to export har file when closing the browser
                 browser.setBrowserProxy(profilingProxy);

@@ -13,11 +13,11 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by ebour on 25/06/15.
  */
-public class BrowserProfilingProxy implements BrowserProxy
+public class FirefoxBrowserProfilingProxy implements BrowserProxy
 {
     private final ProxyServer server;
 
-    public BrowserProfilingProxy(ProxyServer server)
+    public FirefoxBrowserProfilingProxy(ProxyServer server)
     {
         this.server = server;
     }
@@ -26,11 +26,6 @@ public class BrowserProfilingProxy implements BrowserProxy
     public void resetData()
     {
         server.cleanup();
-    }
-
-    public Har getHar()
-    {
-        return server.getHar();
     }
 
     @Override
@@ -44,5 +39,10 @@ public class BrowserProfilingProxy implements BrowserProxy
             }
         }
         return new Long(-1);
+    }
+
+    private Har getHar()
+    {
+        return server.getHar();
     }
 }
