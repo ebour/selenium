@@ -1,4 +1,4 @@
-package com.github.ebour.selenium.leopard;
+package com.github.ebour.selenium.sleek;
 
 import com.github.ebour.selenium.factories.api.browser.Browser;
 import com.github.ebour.selenium.factories.api.element.Element;

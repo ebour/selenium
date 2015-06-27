@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 public class LocalBrowserFactory implements BrowserFactory
 {
     private final static Logger LOG = Logger.getLogger(LocalBrowserFactory.class.getName());
+    private boolean enableProfiling;
 
     @Override
     public Browser instantiate(String browserType, String seleniumHubUrl, boolean browserIsRemote) throws BrowserInitializationException
@@ -22,6 +23,8 @@ public class LocalBrowserFactory implements BrowserFactory
             final long mark = System.currentTimeMillis();
 
             final BrowserFactory browserFactory = BrowserFactoryFactory.instantiateBrowserFactory(browserType);
+            browserFactory.setEnableProfiling(enableProfiling);
+
             final Browser browser = browserFactory.instantiate(browserType, seleniumHubUrl, browserIsRemote);
 
             final int duration = new Double((System.currentTimeMillis() - mark) / 1000.0).intValue();
@@ -37,6 +40,12 @@ public class LocalBrowserFactory implements BrowserFactory
             LOG.log(Level.SEVERE, "Instantiating browser: '" + browserType + "' [FAILED]");
             throw new BrowserInitializationException("", "Instantiating browser: '" + browserType + "' [FAILED]");
         }
+    }
+
+    @Override
+    public void setEnableProfiling(boolean enableProfiling)
+    {
+        this.enableProfiling = enableProfiling;
     }
 
 }

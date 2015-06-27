@@ -2,10 +2,14 @@ package com.github.ebour.selenium.factories.api.page;
 
 import com.github.ebour.selenium.factories.api.browser.Browser;
 import com.github.ebour.selenium.factories.api.element.Element;
+import org.browsermob.core.har.Har;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public interface Page
 {
+    Long getLoadDuration();
+
     /**
      * Retrieve the current page url
      *
@@ -23,31 +27,11 @@ public interface Page
     Page open(String url) throws Exception;
 
     /**
-     * Search for an element given a selector {@link org.openqa.selenium.By}.
-     *
-     * In order to interact with any element, first the page is scrolled
-     * to bring the element in the viewport
-     *
-     * @param selector
-     * @return
-     * @throws Exception
-     */
-    Page click(By selector) throws Exception;
-
-    /**
      * Retrieve the page title
      *
      * @return
      */
     String getTitle();
-
-    /**
-     * Retrieve an element in the page
-     *
-     * @param selector
-     * @return
-     */
-    Element getElement(By selector);
 
     /**
      * Retrieve the browser that renders this page
@@ -66,5 +50,8 @@ public interface Page
      */
     int getYOffset();
 
-    boolean isReady();
+    boolean isReady() throws Exception;
+
+    ExpectedCondition getReadinessCondition() throws Exception;
+
 }

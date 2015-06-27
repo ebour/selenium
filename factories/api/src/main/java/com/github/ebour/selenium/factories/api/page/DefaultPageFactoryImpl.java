@@ -9,13 +9,8 @@ public class DefaultPageFactoryImpl
         return (Page) Class.forName(pageClassName).getConstructor(Browser.class).newInstance(browser);
     }
 
-    public static String getPageClassName()
-    {
-        return System.getProperty("pageClassName", "");
-    }
-
     public static Page buildPage(Browser browser) throws Exception
     {
-        return buildPage(browser, getPageClassName());
+        return buildPage(browser, browser.getPageClassImpl());
     }
 }

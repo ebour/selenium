@@ -2,6 +2,7 @@ package com.github.ebour.selenium.factories.api.browser;
 
 import com.github.ebour.selenium.factories.api.*;
 import com.github.ebour.selenium.factories.api.page.*;
+import org.browsermob.proxy.ProxyServer;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -26,6 +27,8 @@ public class AbstractBrowser implements Browser
     private BrowserProxy      browserProxy;
     private SeleniumService   seleniumService;
     private boolean           remote;
+    private String            pageClassImpl;
+    private boolean           enableProfiling;
 
     public AbstractBrowser(String browserType)
     {
@@ -69,48 +72,16 @@ public class AbstractBrowser implements Browser
     {
         if(!isAtUrl(url))
         {
+            if(enableProfiling)
+            {
+                getBrowserProxy().resetData();
+            }
+
             webDriver.navigate().to(url);
-            awaitPageToBeReadyForTesting();
+            awaitPageReadiness();
         }
 
         return getPage();
-    }
-
-    private Page awaitPageToBeReadyForTesting() throws Exception
-    {
-        final Page page = getPage();
-        final ExpectedCondition pageIsReadyForTesting = getPageReadyForTestingCondition(page);
-
-        final int timeoutInSec = Integer.getInteger("maxPageLoadDuration", 30);
-        try
-        {
-            if(pageIsReadyForTesting != null)
-            {
-                final String title = webDriver.getTitle();
-                final String logMsg = "Awaiting page [title=" + title + "] load end ";
-                LOG.log(Level.INFO, logMsg);
-                final long mark = System.currentTimeMillis();
-
-                awaitCondition(pageIsReadyForTesting, timeoutInSec);
-
-                final int duration = new Double((System.currentTimeMillis() - mark) / 1000.0).intValue();
-                LOG.log(Level.INFO, logMsg + "[Done] [Duration="+duration+"sec]");
-            }
-
-            return page;
-        }
-        catch (TimeoutException e)
-        {
-            LOG.log(Level.SEVERE, "Page load end condition was not verified after : '" + timeoutInSec + "'sec", e);
-            throw new PageTimeoutException("Page load end condition was not verified after : '" + timeoutInSec + "'sec");
-
-        }
-        catch (Exception e)
-        {
-            throw e;
-
-        }
-
     }
 
     @Override
@@ -124,7 +95,7 @@ public class AbstractBrowser implements Browser
         }
         catch (Exception e)
         {
-            throw new com.github.ebour.selenium.factories.api.element.NoSuchElementException("Unable to find element with selector: '" + selector.toString() + "' in page [title="+title+"]");
+            throw new NoSuchElementException("Unable to find element with selector: '" + selector.toString() + "' in page [title="+title+"]");
         }
     }
 
@@ -151,7 +122,7 @@ public class AbstractBrowser implements Browser
         }
         catch (Exception e)
         {
-            throw new com.github.ebour.selenium.factories.api.element.NoSuchElementException("Unable to find element with selector: '" + selector.toString() +"' within the context element: '"+ contextSelector.toString() +"' in page[title="+title+"]");
+            throw new NoSuchElementException("Unable to find element with selector: '" + selector.toString() +"' within the context element: '"+ contextSelector.toString() +"' in page[title="+title+"]");
         }
     }
 
@@ -166,7 +137,7 @@ public class AbstractBrowser implements Browser
         }
         catch (Exception e)
         {
-            throw new com.github.ebour.selenium.factories.api.element.NoSuchElementException("Unable to find elements with selector: '" + selector.toString() + "' in page [title="+title+"]");
+            throw new NoSuchElementException("Unable to find elements with selector: '" + selector.toString() + "' in page [title="+title+"]");
         }
     }
 
@@ -182,7 +153,7 @@ public class AbstractBrowser implements Browser
         }
         catch(Exception e)
         {
-            throw new com.github.ebour.selenium.factories.api.element.NoSuchElementException("Unable to find elements with selector: '" + selector.toString() + "' within the context element: '" + contextSelector.toString() + "' in page [title=" + title + "]");
+            throw new NoSuchElementException("Unable to find elements with selector: '" + selector.toString() + "' within the context element: '" + contextSelector.toString() + "' in page [title=" + title + "]");
         }
     }
 
@@ -257,56 +228,26 @@ public class AbstractBrowser implements Browser
         }
     }
 
-    public ExpectedCondition getPageReadyForTestingCondition(final Page page) throws Exception
-    {
-        if(pageReadyForTesting == null && System.getProperty("pageLoadEndConditionClass") != null)
-        {
-            final String clazz = System.getProperty("pageReadyForTestingClassName");
-            try
-            {
-                LOG.log(Level.INFO, "Instantiating pageReadyForTestingClassName: '"+clazz+"'");
-                pageReadyForTesting = (PageReadyForTesting) Class.forName(clazz).newInstance();
-            }
-            catch (Exception e)
-            {
-                LOG.log(Level.SEVERE, "Unable to instantiate pageReadyForTestingClassName: '"+clazz+"'. Take care to implement the PageReadyForTesting!", e);
-                throw new UndefinedPageReadyClassNameException("Unable to instantiate pageReadyForTestingClassName: '"+clazz+"' as defined from property: 'pageReadyForTestingClassName'");
-            }
-        }
-        if(pageReadyForTesting !=null)
-        {
-            return ((PageReadyForTesting) pageReadyForTesting).isReadyForTesting(page);
-        }
-        else
-        {
-            LOG.log(Level.WARNING, "Undefined 'pageReadyForTestingClassName' property!");
-            return new ExpectedCondition()
-            {
-                @Override
-                public Boolean apply(final Object o)
-                {
-                    return true;
-                }
-            };
-        }
-    }
-
+    @Override
     public Browser setBrowserProxy(BrowserProxy proxy)
     {
         this.browserProxy = browserProxy;
         return this;
     }
 
+    @Override
     public Dimension getSize()
     {
         return webDriver.manage().window().getSize();
     }
 
+    @Override
     public Point getPosition()
     {
         return webDriver.manage().window().getPosition();
     }
 
+    @Override
     public BufferedImage getScreenshot()
     {
         try
@@ -342,6 +283,7 @@ public class AbstractBrowser implements Browser
         return remote;
     }
 
+    @Override
     public void setSize(final String width, final String height)
     {
         if(width == null || height == null)
@@ -355,6 +297,7 @@ public class AbstractBrowser implements Browser
         }
     }
 
+    @Override
     public Object execJavaScript(final String script) throws Exception
     {
         try
@@ -368,6 +311,7 @@ public class AbstractBrowser implements Browser
         }
     }
 
+    @Override
     public int getScrollY() throws Exception
     {
         return ((Long) execJavaScript("return window.scrollY;")).intValue();
@@ -380,5 +324,60 @@ public class AbstractBrowser implements Browser
         wait.until(condition);
 
         return this;
+    }
+
+    @Override
+    public boolean awaitPageReadiness()
+    {
+        final int timeoutInSec = Integer.getInteger("maxPageLoadDuration", 30);
+        try
+        {
+            final Page page = getPage();
+            final ExpectedCondition readinessCondition = page.getReadinessCondition();
+            if(readinessCondition != null)
+            {
+                final String title = webDriver.getTitle();
+                final String logMsg = "Awaiting page [title=" + title + "] load end ";
+                LOG.log(Level.INFO, logMsg);
+                final long mark = System.currentTimeMillis();
+
+                awaitCondition(readinessCondition, timeoutInSec);
+
+                final int duration = new Double((System.currentTimeMillis() - mark) / 1000.0).intValue();
+                LOG.log(Level.INFO, logMsg + "[Done] [Duration="+duration+"sec]");
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            LOG.log(Level.SEVERE, "Page readiness condition not verified after : '" + timeoutInSec + "'sec", e);
+            return false;
+
+        }
+
+    }
+
+    @Override
+    public void setPageClassImpl(String pageClassName)
+    {
+        this.pageClassImpl = pageClassName;
+    }
+
+    @Override
+    public BrowserProxy getBrowserProxy()
+    {
+        return browserProxy;
+    }
+
+    @Override
+    public boolean getEnableProfiling()
+    {
+        return enableProfiling;
+    }
+
+    @Override
+    public String getPageClassImpl()
+    {
+        return pageClassImpl;
     }
 }

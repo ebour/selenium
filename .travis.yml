@@ -3,7 +3,10 @@ language: java
 jdk:
   - oraclejdk7
 
-after_success:
+before_deploy:
+    - test "${TRAVIS_TAG}" != "" && test "${TRAVIS_PULL_REQUEST}" == "false" && mvn clean install -DskipTests -Prelease
+
+deploy:
     - test "${TRAVIS_TAG}" != "" && test "${TRAVIS_PULL_REQUEST}" == "false" && mvn deploy --settings settings.xml
 
 branches:
@@ -18,7 +21,6 @@ env:
 notifications:
   email:
     recipients:
-      - ebour74@gmail.com
       - ebour74@gmail.com
     on_success: change
     on_failure: always

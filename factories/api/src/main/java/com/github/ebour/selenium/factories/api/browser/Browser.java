@@ -2,12 +2,12 @@ package com.github.ebour.selenium.factories.api.browser;
 
 import com.github.ebour.selenium.factories.api.page.Page;
 import com.github.ebour.selenium.factories.api.SeleniumService;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.browsermob.proxy.ProxyServer;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public interface Browser
@@ -42,5 +42,29 @@ public interface Browser
 
     String getTitle();
 
-    Browser awaitCondition(ExpectedCondition condition, int timeoutInSec);
+    Browser setBrowserProxy(BrowserProxy proxy);
+
+    Dimension getSize();
+
+    Point getPosition();
+
+    BufferedImage getScreenshot();
+
+    void setSize(String width, String height);
+
+    Object execJavaScript(String script) throws Exception;
+
+    int getScrollY() throws Exception;
+
+    Browser awaitCondition(ExpectedCondition condition, int timeoutInSec) throws Exception;
+
+    boolean awaitPageReadiness() throws Exception;
+
+    void setPageClassImpl(String pageClassName);
+
+    BrowserProxy getBrowserProxy();
+
+    boolean getEnableProfiling();
+
+    String getPageClassImpl();
 }

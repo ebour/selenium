@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class ChromeBrowserFactory implements BrowserFactory
 {
     private final static Logger LOG = Logger.getLogger(ChromeBrowserFactory.class.getName());
+    private boolean enableProfiling;
 
     @Override
     public Browser instantiate(String browserType, String seleniumHubUrl, boolean browserIsRemote) throws BrowserInitializationException
@@ -41,9 +42,9 @@ public class ChromeBrowserFactory implements BrowserFactory
             // capabilities.setCapability( "chrome.binary", binary );
             // capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
 
-            browser.setSeleniumService(new SeleniumService(service));
+            browser.setSeleniumService( new SeleniumService(service) );
             browser.setWebDriver      ( new ChromeDriver( (ChromeDriverService) service, capabilities ) );
-
+            
             return browser;
         }
         catch (Exception e)
@@ -51,5 +52,11 @@ public class ChromeBrowserFactory implements BrowserFactory
             LOG.log(Level.SEVERE, e.getMessage(), e);
             throw new BrowserInitializationException(browser.getBrowserType(), e.getMessage());
         }
+    }
+
+    @Override
+    public void setEnableProfiling(boolean enableProfiling)
+    {
+        this.enableProfiling = enableProfiling;
     }
 }

@@ -8,4 +8,5 @@ public interface BrowserFactory
 {
     public Browser instantiate(final String browserType, final String seleniumHubUrl, final boolean browserIsRemote) throws BrowserInitializationException;
 
+    void setEnableProfiling(boolean b);
 }

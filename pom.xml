@@ -9,11 +9,34 @@
     <name>Selenium</name>
     <packaging>pom</packaging>
 
+    <properties>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- versions -->
+        <source.version>1.7</source.version>
+        <selenium.version>2.46.0</selenium.version>
+        <phantomjs.version>1.2.0</phantomjs.version>
+
+        <!-- /  versions -->
+
+
+        <!-- plugin versions -->
+        <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
+        <maven-release-plugin.version>2.4.1</maven-release-plugin.version>
+        <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+        <maven-site-plugin.version>3.2</maven-site-plugin.version>
+
+        <!-- / plugin versions -->
+
+    </properties>
+
+    <!-- Licence -->
     <description>
         Set of tools to ease usage of selenium
     </description>
 
-    <!-- Licence -->
     <licenses>
         <license>
             <name>BSD</name>
@@ -51,6 +74,13 @@
         </developer>
     </developers>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/content/ebour/maven/selenium/${project.version}</url>
+        </repository>
+    </distributionManagement>
+
     <scm>
         <connection>scm:git:https://github.com/ebour/selenium.git</connection>
         <developerConnection>scm:git:git@github.com:ebour/selenium.git</developerConnection>
@@ -58,19 +88,12 @@
         <tag>HEAD</tag>
     </scm>
 
-    <properties>
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/ebour/selenium</url>
+    </ciManagement>
 
-        <!-- versions -->
-        <source.version>1.7</source.version>
-        <selenium.version>2.46.0</selenium.version>
-        <phantomjs.version>1.2.0</phantomjs.version>
-
-        <maven-release-plugin.version>2.4.1</maven-release-plugin.version>
-        <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
-
-        <!-- /  versions -->
-
-    </properties>
+    <inceptionYear>2015</inceptionYear>
 
     <modules>
         <module>firefox</module>
@@ -79,13 +102,6 @@
         <module>factories</module>
         <module>sleek</module>
     </modules>
-
-    <distributionManagement>
-        <repository>
-            <id>bintray</id>
-            <url>https://api.bintray.com/content/ebour/maven/selenium/${project.version}</url>
-        </repository>
-    </distributionManagement>
 
     <build>
 
@@ -109,6 +125,34 @@
             </plugin>
         </plugins>
 
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                    <configuration>
+                        <stagingSiteURL>${project.distributionManagement.site.url}</stagingSiteURL>
+                        <reportPlugins>
+                            <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-project-info-reports-plugin</artifactId>
+                                <reportSets>
+                                    <reportSet>
+                                        <reports>
+                                            <report>index</report>
+                                            <report>scm</report>
+                                            <report>cim</report>
+                                            <report>summary</report>
+                                        </reports>
+                                    </reportSet>
+                                </reportSets>
+                            </plugin>
+                        </reportPlugins>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
@@ -117,37 +161,34 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
+                        <version>${maven-source-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
-                                <phase>verify</phase>
                                 <goals>
-                                    <goal>jar-no-fork</goal>
+                                    <goal>jar</goal>
                                 </goals>
+                                <phase>package</phase>
                             </execution>
                         </executions>
                     </plugin>
                     <plugin>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                            <id>attach-sources</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven-javadoc-plugin.version}</version>
                         <executions>
                             <execution>
-                            <id>attach-javadocs</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>javadoc</goal>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <show>package</show>
+                                    <nohelp>true</nohelp>
+                                </configuration>
+                                <phase>package</phase>
                             </execution>
                         </executions>
                     </plugin>
