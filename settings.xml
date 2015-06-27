@@ -4,11 +4,10 @@
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-
     <servers>
         <server>
           <id>bintray</id>
-          <username>ebour</username>
+          <username>${env.BINTRAY_USER}</username>
           <password>${env.BINTRAY_KEY}</password>
         </server>
     </servers>
