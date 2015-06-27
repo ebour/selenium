@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.github.ebour.selenium</groupId>
         <artifactId>selenium-chrome</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
 
     <name>Selenium.Chrome.Driver</name>
