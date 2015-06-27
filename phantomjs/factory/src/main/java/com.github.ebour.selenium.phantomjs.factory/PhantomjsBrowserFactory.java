@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class PhantomjsBrowserFactory implements BrowserFactory
 {
     private final static Logger LOG = Logger.getLogger(PhantomjsBrowserFactory.class.getCanonicalName());
+    private boolean enableProfiling;
 
     @Override
     public Browser instantiate(final String browserType, final String seleniumHubUrl, final boolean browserIsRemote) throws BrowserInitializationException
@@ -30,7 +31,7 @@ public class PhantomjsBrowserFactory implements BrowserFactory
             {
                 cfg.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, System.getProperty("browserOptions", "").split(","));
             }
-            cfg.setCapability(PhantomJSDriverService.PHANTOMJS_GHOSTDRIVER_CLI_ARGS, new String[]{  "--logFile="+System.getProperty("browserLogFile", "phantomjs.log"),
+            cfg.setCapability(PhantomJSDriverService.PHANTOMJS_GHOSTDRIVER_CLI_ARGS, new String[]{"--logFile=" + System.getProperty("browserLogFile", "phantomjs.log"),
                     "--port="+System.getProperty("browserPort", "9091") });
             cfg.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, BrowserFactoryHelper.getBrowserPath());
 
@@ -46,5 +47,11 @@ public class PhantomjsBrowserFactory implements BrowserFactory
             LOG.log(Level.SEVERE, e.getMessage(), e);
             throw new BrowserInitializationException(browser.getBrowserType(), e.getMessage());
         }
+    }
+
+    @Override
+    public void setEnableProfiling(boolean enableProfiling)
+    {
+        this.enableProfiling = enableProfiling;
     }
 }
