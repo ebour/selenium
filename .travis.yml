@@ -3,11 +3,8 @@ language: java
 jdk:
   - oraclejdk7
 
-before_deploy:
-    - test "${TRAVIS_TAG}" != "" && test "${TRAVIS_PULL_REQUEST}" == "false" && mvn clean install -DskipTests -Prelease
-
 deploy:
-    - test "${TRAVIS_TAG}" != "" && test "${TRAVIS_PULL_REQUEST}" == "false" && mvn deploy --settings settings.xml
+    - test "${TRAVIS_TAG}" != "" && test "${TRAVIS_PULL_REQUEST}" == "false" && mvn package -Prelease deploy --settings settings.xml
 
 branches:
   only:
