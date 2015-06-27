@@ -23,13 +23,6 @@ public class DefaultPageImpl extends AbstractPage
     }
 
     @Override
-    public Element getElement(By selector)
-    {
-        final DefaultElementFactoryImpl defaultElementFactory = new DefaultElementFactoryImpl();
-        return defaultElementFactory.newElement(getBrowser(), selector);
-    }
-
-    @Override
     public ExpectedCondition getReadinessCondition() throws Exception
     {
         if(pageReadinessCondition == null && System.getProperty("pageReadyForTestingClassName") != null)
