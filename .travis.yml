@@ -14,10 +14,6 @@ branches:
     - master
     - /^selenium-[0-9]+\.[0-9]+\.[0-9]+/
 
-env:
-    global:
-        - BINTRAY_USER: ebour
-
 notifications:
   email:
     recipients:
